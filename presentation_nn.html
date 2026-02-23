@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ШАРМИКС 🚀 Операция Захвата Нижнего Новгорода</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f4f5;
+            --card: #ffffff;
+            --primary: #FF2E93;
+            --primary-shadow: #c70066;
+            --secondary: #00E5FF;
+            --accent: #FFD500;
+            --text: #18181b;
+            --text-light: #52525b;
+            --border: #18181b;
+            --green: #00e676;
+            --red: #ff3333;
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(var(--text-light) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 20px;
+            line-height: 1.5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        .slide {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            padding: 6vh 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            overflow: hidden;
+        }
+
+        .brutal-box {
+            background: var(--card);
+            border: 4px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 8px 8px 0px var(--border);
+            padding: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .brutal-box:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px var(--border);
+        }
+
+        .brutal-btn {
+            background: var(--accent);
+            border: 3px solid var(--border);
+            border-radius: 50px;
+            box-shadow: 4px 4px 0px var(--border);
+            padding: 12px 24px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brutal-btn:hover {
+            background: var(--secondary);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--border);
+        }
+
+        .brutal-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--border);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            color: var(--text);
+            text-shadow: 4px 4px 0px var(--primary);
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(32px, 4vw, 50px);
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: var(--primary);
+            color: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 6px 6px 0 var(--border);
+            transform: rotate(-1deg);
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+
+        .badge {
+            background: var(--secondary);
+            color: var(--text);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 4px 12px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 3px 3px 0 var(--border);
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .badge.pink {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge.yellow {
+            background: var(--accent);
+        }
+
+        .badge.green {
+            background: var(--green);
+        }
+
+        .marker {
+            background: linear-gradient(104deg, rgba(255, 213, 0, 0) 0.9%, var(--accent) 2.4%, var(--accent) 5.8%, rgba(255, 213, 0, 0) 93%, rgba(255, 213, 0, 0) 96%);
+            padding: 0 5px;
+        }
+
+        .marker-pink {
+            background: linear-gradient(104deg, transparent 0.9%, rgba(255, 46, 147, 0.3) 2.4%, rgba(255, 46, 147, 0.3) 5.8%, transparent 93%);
+        }
+
+        /* Grids */
+        .grid {
+            display: grid;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Chat Bubbles */
+        .chat-bubble {
+            background: var(--card);
+            border: 3px solid var(--border);
+            border-radius: 24px 24px 0 24px;
+            padding: 20px;
+            font-size: 22px;
+            font-family: var(--font-heading);
+            box-shadow: 6px 6px 0 var(--border);
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+            max-width: 80%;
+        }
+
+        .chat-bubble.right {
+            border-radius: 24px 24px 24px 0;
+            background: var(--secondary);
+            text-align: right;
+        }
+
+        /* Stat Bars */
+        .stat-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-label {
+            width: 220px;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-track {
+            flex: 1;
+            height: 36px;
+            background: #e4e4e7;
+            border: 3px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: repeating-linear-gradient(45deg, var(--primary), var(--primary) 10px, var(--primary-shadow) 10px, var(--primary-shadow) 20px);
+            width: 0;
+            transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-right: 3px solid var(--border);
+        }
+
+        .stat-fill.cyan {
+            background: repeating-linear-gradient(45deg, var(--secondary), var(--secondary) 10px, #00b3cc 10px, #00b3cc 20px);
+        }
+
+        .stat-fill.yellow {
+            background: repeating-linear-gradient(45deg, var(--accent), var(--accent) 10px, #ccaa00 10px, #ccaa00 20px);
+        }
+
+        .stat-fill.green {
+            background: repeating-linear-gradient(45deg, #00e676, #00e676 10px, #00c853 10px, #00c853 20px);
+        }
+
+        .stat-val {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 20px;
+            width: 90px;
+            text-align: right;
+        }
+
+        /* Decorations */
+        .deco {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star-spin {
+            animation: spin 4s linear infinite;
+        }
+
+        .wobble {
+            animation: wobble 3s ease-in-out infinite;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .svg-star {
+            width: 60px;
+            height: 60px;
+            fill: var(--primary);
+            stroke: var(--border);
+            stroke-width: 3;
+        }
+
+        .svg-smiley {
+            width: 80px;
+            height: 80px;
+            fill: var(--accent);
+            stroke: var(--border);
+            stroke-width: 3;
+        }
+
+        .svg-zigzag {
+            width: 100px;
+            height: 40px;
+            stroke: var(--secondary);
+            stroke-width: 8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Map visualization */
+        .map-container {
+            position: relative;
+            background: #e8e8e8;
+            border: 4px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 8px 8px 0 var(--border);
+            overflow: hidden;
+            padding: 0;
+            aspect-ratio: 16/10;
+        }
+
+        .map-grid {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background:
+                linear-gradient(90deg, rgba(200, 200, 200, .3) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(200, 200, 200, .3) 1px, transparent 1px);
+            background-size: 40px 40px;
+            min-height: 300px;
+        }
+
+        .map-road {
+            position: absolute;
+            background: #d4d4d4;
+            border: 1px solid #bbb;
+        }
+
+        .map-road.h {
+            height: 6px;
+            width: 80%;
+            top: 50%;
+            left: 10%;
+        }
+
+        .map-road.h2 {
+            height: 6px;
+            width: 60%;
+            top: 30%;
+            left: 20%;
+        }
+
+        .map-road.h3 {
+            height: 6px;
+            width: 70%;
+            top: 70%;
+            left: 15%;
+        }
+
+        .map-road.v {
+            width: 6px;
+            height: 80%;
+            top: 10%;
+            left: 50%;
+        }
+
+        .map-road.v2 {
+            width: 6px;
+            height: 60%;
+            top: 20%;
+            left: 25%;
+        }
+
+        .map-road.v3 {
+            width: 6px;
+            height: 60%;
+            top: 15%;
+            left: 75%;
+        }
+
+        .map-dot {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 3px solid var(--border);
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .map-dot.red {
+            background: var(--red);
+        }
+
+        .map-dot.blue {
+            background: var(--secondary);
+            width: 16px;
+            height: 16px;
+            animation: pulse-blue 2s ease-in-out infinite;
+        }
+
+        .map-dot-label {
+            position: absolute;
+            transform: translate(-50%, 15px);
+            font-size: 11px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            white-space: nowrap;
+            z-index: 3;
+            background: white;
+            padding: 2px 6px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+        }
+
+        @keyframes pulse-blue {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 229, 255, .6);
+            }
+
+            50% {
+                box-shadow: 0 0 0 12px rgba(0, 229, 255, 0);
+            }
+        }
+
+        /* Before / After */
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            align-items: center;
+            gap: 0;
+        }
+
+        .ba-side {
+            background: var(--card);
+            border: 4px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 8px 8px 0 var(--border);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .ba-side .ba-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .ba-side .ba-label {
+            padding: 12px;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 20px;
+            border-top: 3px solid var(--border);
+        }
+
+        .ba-arrow {
+            text-align: center;
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--primary);
+            animation: bounce-h 1s infinite alternate;
+        }
+
+        /* Pricing */
+        .price-card {
+            text-align: center;
+            padding: 40px 30px;
+        }
+
+        .price-old {
+            font-family: var(--font-heading);
+            font-size: clamp(40px, 5vw, 60px);
+            font-weight: 900;
+            color: var(--red);
+            text-decoration: line-through;
+            opacity: 0.5;
+            display: block;
+            line-height: 1;
+        }
+
+        .price-new {
+            font-family: var(--font-heading);
+            font-size: clamp(55px, 8vw, 90px);
+            font-weight: 900;
+            color: var(--green);
+            display: block;
+            line-height: 1;
+            margin: 10px 0;
+            text-shadow: 4px 4px 0 rgba(0, 200, 83, 0.3);
+        }
+
+        .price-label {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: rotate(-5deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(10px);
+            }
+        }
+
+        @keyframes bounce-h {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes grow-bar {
+            from {
+                width: 0;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+        }
+
+        .slide.active .reveal {
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .d-1 {
+            animation-delay: 0.1s;
+        }
+
+        .d-2 {
+            animation-delay: 0.3s;
+        }
+
+        .d-3 {
+            animation-delay: 0.5s;
+        }
+
+        /* Navigation */
+        .nav-box {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        /* Slide counter */
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 16px;
+            background: var(--card);
+            border: 3px solid var(--border);
+            border-radius: 30px;
+            padding: 6px 16px;
+            box-shadow: 4px 4px 0 var(--border);
+            z-index: 100;
+        }
+
+        /* Metaphor callout */
+        .metaphor {
+            background: linear-gradient(135deg, #FFF9C4, #FFF176);
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 24px;
+            font-size: 20px;
+            font-weight: 600;
+            font-style: italic;
+            box-shadow: 5px 5px 0 var(--border);
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .metaphor::before {
+            content: '💡';
+            font-size: 30px;
+            position: absolute;
+            top: -18px;
+            left: 15px;
+            font-style: normal;
+        }
+
+        /* Meme frame */
+        .meme-frame {
+            background: var(--card);
+            border: 4px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 8px 8px 0 var(--border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meme-frame img {
+            width: 100%;
+            display: block;
+        }
+
+        .meme-frame .meme-caption {
+            padding: 15px 20px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            border-top: 3px solid var(--border);
+            text-align: center;
+        }
+
+        /* Dashboard chart */
+        .chart-container {
+            position: relative;
+            height: 200px;
+            border-left: 3px solid var(--border);
+            border-bottom: 3px solid var(--border);
+            margin: 20px 0;
+            padding: 10px 10px 0;
+        }
+
+        .chart-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-label-y {
+            position: absolute;
+            left: -45px;
+            font-family: var(--font-heading);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .chart-label-x {
+            position: absolute;
+            bottom: -28px;
+            font-family: var(--font-heading);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .slide {
+                padding: 10vh 5vw;
+            }
+
+            .stat-label {
+                width: 150px;
+                font-size: 16px;
+            }
+
+            .before-after {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .ba-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== SLIDE 1: VIBE CHECK ==================== -->
+    <section class="slide" id="s1">
+        <svg class="deco star-spin" style="top: 10%; right: 10%;" viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-star" d="M50 0 L61.8 38.2 L100 50 L61.8 61.8 L50 100 L38.2 61.8 L0 50 L38.2 38.2 Z" />
+        </svg>
+        <svg class="deco float" style="bottom: 15%; left: 5%;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" class="svg-smiley" />
+            <circle cx="35" cy="40" r="5" fill="#18181b" />
+            <circle cx="65" cy="40" r="5" fill="#18181b" />
+            <path d="M 30 65 Q 50 85 70 65" stroke="#18181b" stroke-width="5" fill="none" stroke-linecap="round" />
+        </svg>
+
+        <div class="reveal">
+            <span class="badge yellow" style="font-size: 20px; margin-bottom: 20px; transform: rotate(-5deg);">🚀
+                ОПЕРАЦИЯ ЗАХВАТА</span>
+            <br>
+            <h1>ШАРМИКС:<br>ЗАХВАТ<br>НИЖНЕГО<br>НОВГОРОДА 🎯</h1>
+
+            <div class="brutal-box"
+                style="display: inline-block; transform: rotate(2deg); margin-top: 20px; border-color: var(--primary);">
+                <p style="font-size: 24px; font-weight: 700; margin: 0;">В чём проблема? Vibe Check 🧐</p>
+                <p style="color: var(--text-light); font-size: 16px; margin: 0; font-family: var(--font-heading);">
+                    Мы переехали, нас не знают, а конкуренты уже захватили дворы.</p>
+            </div>
+        </div>
+
+        <!-- Map visualization -->
+        <div class="reveal d-1" style="margin-top: 30px;">
+            <div class="map-container" style="max-width: 700px;">
+                <div class="map-grid">
+                    <!-- Roads -->
+                    <div class="map-road h"></div>
+                    <div class="map-road h2"></div>
+                    <div class="map-road h3"></div>
+                    <div class="map-road v"></div>
+                    <div class="map-road v2"></div>
+                    <div class="map-road v3"></div>
+
+                    <!-- Red dots (competitors) -->
+                    <div class="map-dot red" style="top: 25%; left: 20%;"></div>
+                    <div class="map-dot red" style="top: 35%; left: 40%;"></div>
+                    <div class="map-dot red" style="top: 50%; left: 60%;"></div>
+                    <div class="map-dot red" style="top: 30%; left: 70%;"></div>
+                    <div class="map-dot red" style="top: 65%; left: 30%;"></div>
+                    <div class="map-dot red" style="top: 70%; left: 55%;"></div>
+                    <div class="map-dot red" style="top: 45%; left: 85%;"></div>
+                    <div class="map-dot red" style="top: 20%; left: 55%;"></div>
+                    <div class="map-dot red" style="top: 60%; left: 80%;"></div>
+                    <div class="map-dot red" style="top: 80%; left: 45%;"></div>
+
+                    <!-- Blue dot (us) -->
+                    <div class="map-dot blue" style="top: 55%; left: 38%;"></div>
+                    <div class="map-dot-label" style="top: 55%; left: 38%; color: var(--secondary);">👋 Мы тут, но нас
+                        не видно</div>
+                </div>
+                <div
+                    style="position: absolute; top: 12px; left: 12px; display: flex; gap: 15px; font-size: 13px; font-family: var(--font-heading); font-weight: 700;">
+                    <span><span
+                            style="display:inline-block; width:12px; height:12px; background:var(--red); border:2px solid var(--border); border-radius:50; margin-right:4px;"></span>
+                        Конкуренты</span>
+                    <span><span
+                            style="display:inline-block; width:12px; height:12px; background:var(--secondary); border:2px solid var(--border); border-radius:50%; margin-right:4px;"></span>
+                        Шармикс</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="metaphor reveal d-2">
+            Открывать бизнес без маркетинга — это как подмигивать девушке в полной темноте. Ты знаешь, что ты крутой, а
+            она — нет.
+        </div>
+
+        <!-- Meme -->
+        <div class="reveal d-3" style="max-width: 450px;">
+            <div class="meme-frame">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExang2bGo4YWF5dXpiZG5ibGk2NXRhM29wMTc0ZHR2bTlzcW54aDlhNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ND6xkVPaj8tHO/giphy.gif"
+                    alt="Business Cat">
+                <div class="meme-caption">🐱 «Я официально заявляю: нам нужны клиенты»</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: БЫСТРЫЕ ДЕНЬГИ (КАРТЫ) ==================== -->
+    <section class="slide" id="s2">
+        <svg class="deco wobble" style="top: 15%; left: 80%;" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+            <polyline class="svg-zigzag" points="10,20 30,10 50,30 70,10 90,20" />
+        </svg>
+
+        <div class="reveal">
+            <span class="badge yellow" style="font-size: 18px; margin-bottom: 10px;">ЭТАП 1</span>
+            <h2>🗺️ План «Быстрые Деньги» (Карты) — 3 000 ₽</h2>
+        </div>
+
+        <div class="grid grid-2 reveal d-1">
+            <div class="brutal-box" style="border-top: 12px solid var(--accent);">
+                <h3 style="color: var(--primary);">🔥 Почему это №1?</h3>
+                <p style="font-size: 24px; font-weight: 700;">Самый горячий трафик. Люди ищут <span class="marker">«шары
+                        рядом»</span> прямо сейчас.</p>
+                <h3>Что делаем:</h3>
+                <ul
+                    style="list-style-type: '✅ '; margin-left: 20px; font-size: 20px; font-weight: 600; line-height: 2;">
+                    <li>SEO-оптимизация карточек на Яндекс Картах и 2GIS</li>
+                    <li>Работа с отзывами (стратегия сбора)</li>
+                    <li>Красивые, продающие фото товара</li>
+                    <li>Заполнение всех ключевых слов и категорий</li>
+                </ul>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="metaphor" style="margin: 0;">
+                    Это как поставить огромный светящийся указатель прямо над входом. Люди ходят мимо каждый день —
+                    осталось только включить свет!
+                </div>
+
+                <!-- Dashboard Chart -->
+                <div class="brutal-box" style="background: var(--card);">
+                    <h3 style="font-size: 18px; margin-bottom: 5px;">📈 Просмотры карточки после оптимизации</h3>
+                    <div class="chart-container" style="height: 160px;">
+                        <svg width="100%" height="100%" viewBox="0 0 400 160" preserveAspectRatio="none">
+                            <!-- Grid lines -->
+                            <line x1="0" y1="40" x2="400" y2="40" stroke="#eee" stroke-width="1" />
+                            <line x1="0" y1="80" x2="400" y2="80" stroke="#eee" stroke-width="1" />
+                            <line x1="0" y1="120" x2="400" y2="120" stroke="#eee" stroke-width="1" />
+                            <!-- The line chart -->
+                            <polyline points="0,150 50,148 100,145 150,140 170,130 200,100 250,60 300,30 350,15 400,10"
+                                fill="none" stroke="var(--primary)" stroke-width="4" stroke-linecap="round"
+                                stroke-linejoin="round" style="filter: drop-shadow(2px 2px 2px rgba(255,46,147,.3));" />
+                            <!-- Fill area -->
+                            <polygon
+                                points="0,150 50,148 100,145 150,140 170,130 200,100 250,60 300,30 350,15 400,10 400,160 0,160"
+                                fill="url(#pinkGrad)" opacity="0.3" />
+                            <defs>
+                                <linearGradient id="pinkGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="var(--primary)" />
+                                    <stop offset="100%" stop-color="transparent" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Annotation -->
+                            <text x="170" y="125" font-size="11" font-family="Space Grotesk" font-weight="700"
+                                fill="var(--text-light)">← Заполнили ключевые слова</text>
+                            <circle cx="170" cy="130" r="5" fill="var(--accent)" stroke="var(--border)"
+                                stroke-width="2" />
+                        </svg>
+                        <span class="chart-label-x" style="left: 5%;">Было</span>
+                        <span class="chart-label-x" style="right: 5%;">Месяц спустя 🚀</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-bubble right reveal d-2" style="float: right; margin-top: 10px;">
+            Яндекс Карты — это бесплатный поток горячих лидов. Надо только правильно оформить. 🗺️🔑
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: СОЦСЕТИ ==================== -->
+    <section class="slide" id="s3">
+        <svg class="deco float" style="top: 10%; right: 10%;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" fill="none" stroke="var(--primary)"
+                stroke-width="6" />
+        </svg>
+
+        <div class="reveal">
+            <span class="badge pink" style="font-size: 18px; margin-bottom: 10px;">ЭТАП 2</span>
+            <h2>📱 Витрина, которая влюбляет (Соцсети) — 5 000 ₽</h2>
+        </div>
+
+        <div class="grid grid-2 reveal d-1">
+            <div class="brutal-box" style="border-top: 12px solid var(--primary);">
+                <h3>💖 Зачем?</h3>
+                <p style="font-size: 22px; font-weight: 600;">Карты приводят, <span class="marker">соцсети
+                        продают</span>. Люди покупают глазами.</p>
+                <h3>Что делаем:</h3>
+                <ul
+                    style="list-style-type: '🎨 '; margin-left: 20px; font-size: 20px; font-weight: 600; line-height: 2;">
+                    <li>Визуальный дизайн аккаунтов (единый стиль)</li>
+                    <li>Закрепленный пост «Почему мы»</li>
+                    <li>Шаблоны для быстрых Reels</li>
+                    <li>Эстетичный каталог с ценами</li>
+                </ul>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="metaphor" style="margin: 0;">
+                    Соцсети — это твоё платье на первом свидании. Должно быть безупречно. 👗✨
+                </div>
+
+                <!-- Before / After -->
+                <div class="before-after">
+                    <div class="ba-side" style="border-color: var(--red);">
+                        <div class="ba-img" style="background: linear-gradient(135deg, #f5e6d3, #e8d5c4);">
+                            <div style="font-size: 60px; line-height: 1; position: relative;">
+                                🎈
+                                <div
+                                    style="position: absolute; top: -10px; right: -30px; font-size: 20px; transform: rotate(15deg);">
+                                    😬</div>
+                            </div>
+                        </div>
+                        <div class="ba-label" style="background: #fff0f0; color: var(--red);">
+                            ❌ ДО<br>
+                            <span style="font-size: 14px; font-weight: 500; color: var(--text-light);">Фото шаров на
+                                фоне обоев бабушки</span>
+                        </div>
+                    </div>
+
+                    <div class="ba-arrow">➡️</div>
+
+                    <div class="ba-side" style="border-color: var(--green);">
+                        <div class="ba-img" style="background: linear-gradient(135deg, #e8dcc8, #d4a0a0, #b2a4d4);">
+                            <div style="font-size: 60px; line-height: 1; position: relative;">
+                                🎈✨
+                                <div
+                                    style="position: absolute; top: -10px; right: -30px; font-size: 20px; transform: rotate(15deg);">
+                                    🤩</div>
+                            </div>
+                        </div>
+                        <div class="ba-label" style="background: #f0fff0; color: #00aa44;">
+                            ✅ ПОСЛЕ<br>
+                            <span style="font-size: 14px; font-weight: 500; color: var(--text-light);">Эстетичный
+                                контент в стиле 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-bubble reveal d-2">
+            Первое впечатление в Инсте складывается за 0.3 секунды. Если визуал не цепляет — клиент уже ушел к
+            конкуренту. 🏃‍♀️
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: СКРИПТЫ И ДОЖИМ ==================== -->
+    <section class="slide" id="s4">
+        <svg class="deco star-spin" style="bottom: 15%; right: 8%;" viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-star" d="M50 0 L61.8 38.2 L100 50 L61.8 61.8 L50 100 L38.2 61.8 L0 50 L38.2 38.2 Z" />
+        </svg>
+
+        <div class="reveal">
+            <span class="badge" style="font-size: 18px; margin-bottom: 10px; background: var(--secondary);">ЭТАП
+                3</span>
+            <h2>🥷 Спецназ продаж (Скрипты и Дожим) — 2 000 ₽</h2>
+        </div>
+
+        <div class="grid grid-2 reveal d-1">
+            <div class="brutal-box" style="border-top: 12px solid var(--secondary);">
+                <h3 style="color: var(--primary);">💬 Зачем?</h3>
+                <p style="font-size: 22px; font-weight: 600;">Чтобы ни один входящий запрос не ушёл <span
+                        class="marker-pink">«подумать»</span>.</p>
+
+                <h3>Что делаем:</h3>
+                <ul
+                    style="list-style-type: '🎯 '; margin-left: 20px; font-size: 20px; font-weight: 600; line-height: 2;">
+                    <li>Сценарии ответов в Директ и WhatsApp</li>
+                    <li>Закрываем 8 из 10 входящих запросов</li>
+                    <li>Лид-магнит (скидка за подписку)</li>
+                    <li>Шаблоны быстрых ответов</li>
+                </ul>
+
+                <!-- Conversion stat bar -->
+                <div style="margin-top: 20px;">
+                    <div class="stat-item">
+                        <div class="stat-label">Без скриптов 😐</div>
+                        <div class="stat-track">
+                            <div class="stat-fill" style="width: 30%;"></div>
+                        </div>
+                        <div class="stat-val">3 из 10</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Со скриптами 🔥</div>
+                        <div class="stat-track">
+                            <div class="stat-fill green" style="width: 80%;"></div>
+                        </div>
+                        <div class="stat-val">8 из 10</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="metaphor" style="margin: 0;">
+                    Маркетинг привёл гостя к столу, а скрипты — это официант, который продаёт десерт. 🍰
+                </div>
+
+                <!-- Example script -->
+                <div class="brutal-box" style="background: var(--bg);">
+                    <h3 style="font-size: 18px; color: var(--primary);">Пример скрипта для Директ:</h3>
+                    <p
+                        style="font-size: 18px; text-decoration: line-through; color: var(--text-light); margin-bottom: 10px;">
+                        «Сет стоит 3500. Доставка отдельно.»
+                    </p>
+                    <div
+                        style="background: white; padding: 18px; border-radius: 12px; border: 2px solid var(--border);">
+                        <p style="font-size: 18px; font-weight: 700; margin: 0;">
+                            «Привет! 🎉 Отличный выбор! А для кого будет праздник? Мальчик/девочка? Какой возраст?
+                            Ответьте — и я за 2 минуты скину 3 сочных варианта под ваш бюджет с фотками!»
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Meme -->
+                <div class="meme-frame" style="max-width: 400px;">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczJiZGUybjd5Nmd2N2xranNlZnAwZTczaGh6MHRzbjc5bjUzaDBibiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12WEBZaeMLsMnu/giphy.gif"
+                        alt="Wolf of Wall Street">
+                    <div class="meme-caption">«Продай мне этот шарик» 🎈💰</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 5: ОБОСНОВАНИЕ ЦЕНЫ ==================== -->
+    <section class="slide" id="s5" style="align-items: center; text-align: center;">
+        <svg class="deco star-spin" style="top: 15%; left: 10%;" viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-star" d="M50 0 L61.8 38.2 L100 50 L61.8 61.8 L50 100 L38.2 61.8 L0 50 L38.2 38.2 Z" />
+        </svg>
+        <svg class="deco float" style="bottom: 20%; right: 10%;" viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" class="svg-smiley" />
+            <circle cx="35" cy="40" r="5" fill="#18181b" />
+            <circle cx="65" cy="40" r="5" fill="#18181b" />
+            <path d="M 30 65 Q 50 85 70 65" stroke="#18181b" stroke-width="5" fill="none" stroke-linecap="round" />
+        </svg>
+
+        <div class="reveal">
+            <span class="badge yellow" style="font-size: 20px; margin-bottom: 20px;">💎 ДЛЯ СВОИХ</span>
+            <br>
+            <h1 style="text-shadow: 4px 4px 0 var(--secondary);">Сколько стоит<br>Успех?</h1>
+        </div>
+
+        <!-- Price comparison -->
+        <div class="grid grid-2 reveal d-1" style="max-width: 900px; margin: 30px auto; text-align: center;">
+            <div class="brutal-box price-card" style="background: #fff0f0; border-color: var(--red);">
+                <h3 style="font-size: 18px; color: var(--text-light); margin-bottom: 20px;">Рыночная цена пакета</h3>
+                <span class="price-old">45 000 ₽</span>
+                <span class="price-label" style="font-size: 20px; margin-top: 15px;">❌ Столько берут агентства</span>
+            </div>
+
+            <div class="brutal-box price-card" style="background: #f0fff0; border-color: var(--green);">
+                <h3 style="font-size: 18px; color: var(--text-light); margin-bottom: 20px;">Спец. тариф «Подруга»</h3>
+                <span class="price-new">10 000 ₽</span>
+                <span class="price-label" style="font-size: 20px; margin-top: 15px;">✅ Для Шармикс</span>
+            </div>
+        </div>
+
+        <!-- Breakdown -->
+        <div class="brutal-box reveal d-2" style="max-width: 700px; margin: 0 auto; text-align: left;">
+            <h3 style="text-align: center; margin-bottom: 20px;">📦 Что входит в пакет:</h3>
+            <div class="stat-item">
+                <div class="stat-label">🗺️ Карты (SEO)</div>
+                <div class="stat-track">
+                    <div class="stat-fill yellow" style="width: 30%;"></div>
+                </div>
+                <div class="stat-val">3 000 ₽</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">📱 Соцсети</div>
+                <div class="stat-track">
+                    <div class="stat-fill" style="width: 50%;"></div>
+                </div>
+                <div class="stat-val">5 000 ₽</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">🥷 Скрипты</div>
+                <div class="stat-track">
+                    <div class="stat-fill cyan" style="width: 20%;"></div>
+                </div>
+                <div class="stat-val">2 000 ₽</div>
+            </div>
+        </div>
+
+        <div class="brutal-box reveal d-2"
+            style="max-width: 700px; margin: 25px auto 0; background: var(--accent); text-align: center;">
+            <p style="font-size: 24px; font-weight: 800; margin: 0; font-family: var(--font-heading);">
+                💡 Это стоимость 4–5 средних сетов шаров.<br>
+                <span class="marker-pink">Окупается за первую неделю работы.</span>
+            </p>
+        </div>
+
+        <div class="chat-bubble reveal d-3" style="margin-top: 25px;">
+            🤝 Работаю на результат, потому что верю в твой проект. Это не просто услуга — это партнёрство. 💪
+        </div>
+
+        <button class="brutal-btn reveal d-3" style="margin-top: 30px; font-size: 24px; padding: 20px 40px;"
+            onclick="window.scrollTo(0,0)">
+            🧨 ПОГНАЛИ ЗАХВАТЫВАТЬ!
+        </button>
+    </section>
+
+    <!-- Navigation Box -->
+    <div class="nav-box">
+        <button class="brutal-btn" onclick="moveSlide(-1)" style="padding: 10px 15px;">⬆️</button>
+        <button class="brutal-btn" onclick="moveSlide(1)" style="padding: 10px 15px;">⬇️</button>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter" id="slideCounter">1 / 5</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('slideCounter');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+
+            currentSlide = index;
+            slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+
+            slides.forEach((slide, i) => {
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function moveSlide(dir) { showSlide(currentSlide + dir); }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    slides.forEach((s, idx) => {
+                        if (s === entry.target) {
+                            currentSlide = idx;
+                            counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+                        }
+                    });
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault(); moveSlide(1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault(); moveSlide(-1);
+            }
+        });
+
+        setTimeout(() => { slides[0].classList.add('active'); }, 100);
+    </script>
+</body>
+
+</html>
