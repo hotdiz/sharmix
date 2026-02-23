@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ШАРМИКС 🎈 Стратегия Захвата</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f4f5;
+            --card: #ffffff;
+            --primary: #FF2E93;
+            /* Hot pink */
+            --primary-shadow: #c70066;
+            --secondary: #00E5FF;
+            /* Cyan */
+            --accent: #FFD500;
+            /* Yellow */
+            --text: #18181b;
+            --text-light: #52525b;
+            --border: #18181b;
+
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(var(--text-light) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 20px;
+            line-height: 1.5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
+        /* Brutalist UI Elements */
+        .slide {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            padding: 6vh 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            scroll-snap-align: start;
+            overflow: hidden;
+        }
+
+        .brutal-box {
+            background: var(--card);
+            border: 4px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 8px 8px 0px var(--border);
+            padding: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .brutal-box:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px var(--border);
+        }
+
+        .brutal-btn {
+            background: var(--accent);
+            border: 3px solid var(--border);
+            border-radius: 50px;
+            box-shadow: 4px 4px 0px var(--border);
+            padding: 12px 24px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brutal-btn:hover {
+            background: var(--secondary);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--border);
+        }
+
+        .brutal-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--border);
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            color: var(--text);
+            text-shadow: 4px 4px 0px var(--primary);
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(32px, 4vw, 50px);
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: var(--primary);
+            color: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 6px 6px 0 var(--border);
+            transform: rotate(-1deg);
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+
+        .badge {
+            background: var(--secondary);
+            color: var(--text);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 4px 12px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 3px 3px 0 var(--border);
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .badge.pink {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge.yellow {
+            background: var(--accent);
+        }
+
+        /* Highlights & Markers */
+        .marker {
+            background: linear-gradient(104deg, rgba(255, 213, 0, 0) 0.9%, var(--accent) 2.4%, var(--accent) 5.8%, rgba(255, 213, 0, 0) 93%, rgba(255, 213, 0, 0) 96%);
+            padding: 0 5px;
+        }
+
+        .marker-pink {
+            background: linear-gradient(104deg, transparent 0.9%, rgba(255, 46, 147, 0.3) 2.4%, rgba(255, 46, 147, 0.3) 5.8%, transparent 93%);
+        }
+
+        /* Grids */
+        .grid {
+            display: grid;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .grid-traffic {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Funnel */
+        .funnel-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .funnel-box {
+            background: var(--card);
+            border: 4px solid var(--border);
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 22px;
+            text-align: center;
+            box-shadow: 6px 6px 0 var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .funnel-box span {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .arrow-down {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--primary);
+            animation: bounce 1s infinite alternate;
+        }
+
+        /* Stats Bars */
+        .stat-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-label {
+            width: 220px;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-track {
+            flex: 1;
+            height: 36px;
+            background: #e4e4e7;
+            border: 3px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-fill {
+            height: 100%;
+            background: repeating-linear-gradient(45deg, var(--primary), var(--primary) 10px, var(--primary-shadow) 10px, var(--primary-shadow) 20px);
+            width: 0;
+            transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-right: 3px solid var(--border);
+        }
+
+        .stat-fill.cyan {
+            background: repeating-linear-gradient(45deg, var(--secondary), var(--secondary) 10px, #00b3cc 10px, #00b3cc 20px);
+        }
+
+        .stat-fill.yellow {
+            background: repeating-linear-gradient(45deg, var(--accent), var(--accent) 10px, #ccaa00 10px, #ccaa00 20px);
+        }
+
+        .stat-fill.green {
+            background: repeating-linear-gradient(45deg, #00e676, #00e676 10px, #00c853 10px, #00c853 20px);
+        }
+
+        .stat-fill.black {
+            background: repeating-linear-gradient(45deg, #333, #333 10px, #111 10px, #111 20px);
+        }
+
+        .stat-val {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 20px;
+            width: 60px;
+            text-align: right;
+        }
+
+        /* Palette Circles */
+        .palette {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .color-swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid var(--border);
+            box-shadow: 3px 3px 0 var(--border);
+            transition: transform 0.2s;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-5px);
+        }
+
+        .color-swatch::after {
+            content: attr(data-hex);
+            position: absolute;
+            bottom: -25px;
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.2s;
+            background: white;
+            border: 1px solid black;
+            padding: 2px 5px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .color-swatch:hover::after {
+            opacity: 1;
+        }
+
+        /* Memphis Design Elements (Decorations) */
+        .deco {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star-spin {
+            animation: spin 4s linear infinite;
+        }
+
+        .wobble {
+            animation: wobble 3s ease-in-out infinite;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: rotate(-5deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(10px);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+        }
+
+        .slide.active .reveal {
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .d-1 {
+            animation-delay: 0.1s;
+        }
+
+        .d-2 {
+            animation-delay: 0.3s;
+        }
+
+        .d-3 {
+            animation-delay: 0.5s;
+        }
+
+        /* Chat Bubbles (For Quotes/Memes) */
+        .chat-bubble {
+            background: var(--card);
+            border: 3px solid var(--border);
+            border-radius: 24px 24px 0 24px;
+            padding: 20px;
+            font-size: 22px;
+            font-family: var(--font-heading);
+            box-shadow: 6px 6px 0 var(--border);
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+            max-width: 80%;
+        }
+
+        .chat-bubble.right {
+            border-radius: 24px 24px 24px 0;
+            background: var(--secondary);
+            text-align: right;
+        }
+
+        /* Table */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            background: var(--card);
+            box-shadow: 8px 8px 0 var(--border);
+            min-width: 900px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border-bottom: 2px solid var(--border);
+            border-right: 2px solid var(--border);
+            font-size: 18px;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        td:last-child,
+        th:last-child {
+            border-right: none;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .highlight-row td {
+            background: var(--accent);
+            font-weight: 700;
+        }
+
+        .check-yes {
+            color: #00c853;
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        .check-no {
+            color: #d50000;
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        .nav-box {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        @media (max-width: 900px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4,
+            .grid-traffic {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .slide {
+                padding: 10vh 5vw;
+            }
+
+            .stat-label {
+                width: 150px;
+                font-size: 16px;
+            }
+        }
+
+        /* SVG Assets */
+        .svg-star {
+            width: 60px;
+            height: 60px;
+            fill: var(--primary);
+            stroke: var(--border);
+            stroke-width: 3;
+        }
+
+        .svg-smiley {
+            width: 80px;
+            height: 80px;
+            fill: var(--accent);
+            stroke: var(--border);
+            stroke-width: 3;
+        }
+
+        .svg-zigzag {
+            width: 100px;
+            height: 40px;
+            stroke: var(--secondary);
+            stroke-width: 8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Slide 1 -->
+    <section class="slide" id="s1">
+        <svg class="deco star-spin" style="top: 10%; right: 10%;" viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-star" d="M50 0 L61.8 38.2 L100 50 L61.8 61.8 L50 100 L38.2 61.8 L0 50 L38.2 38.2 Z" />
+        </svg>
+        <svg class="deco float" style="bottom: 15%; left: 5%;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" class="svg-smiley" />
+            <circle cx="35" cy="40" r="5" fill="#18181b" />
+            <circle cx="65" cy="40" r="5" fill="#18181b" />
+            <path d="M 30 65 Q 50 85 70 65" stroke="#18181b" stroke-width="5" fill="none" stroke-linecap="round" />
+        </svg>
+
+        <div class="reveal">
+            <span class="badge yellow" style="font-size: 20px; margin-bottom: 20px; transform: rotate(-5deg);">🔥 TOP
+                SECRET PLAN</span>
+            <br>
+            <h1>ШАРМИКС:<br>ОПЕРАЦИЯ <br>«НАДУТЬ РЫНОК» 🎈</h1>
+
+            <div class="brutal-box"
+                style="display: inline-block; transform: rotate(2deg); margin-top: 20px; border-color: var(--primary);">
+                <p style="font-size: 24px; font-weight: 700; margin: 0;">Стратегия: Кстово & НН за 3 месяца 🚀</p>
+                <p style="color: var(--text-light); font-size: 16px; margin: 0; font-family: var(--font-heading);">
+                    Февраль 2026. Spoiler: мы заберем всех клиентов.</p>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <div class="chat-bubble">«А давайте просто делать нормальный сервис и снимать крутые рилсы?» 💅</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide" id="s2">
+        <svg class="deco wobble" style="top: 15%; left: 80%;" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+            <polyline class="svg-zigzag" points="10,20 30,10 50,30 70,10 90,20" />
+        </svg>
+
+        <h2 class="reveal">🌍 Чо происходит на рынке?</h2>
+
+        <div class="grid grid-2 reveal d-1">
+            <div class="brutal-box">
+                <h3>Конкуренты застряли в 2015 🦕</h3>
+                <p>Мы насчитали 10+ ребят в нашем районе. Но они всё ещё работают по схеме: <strong>"Выложил фотку в ВК
+                        с текстом 'Цена в ЛС' и жду чуда"</strong>.</p>
+                <ul
+                    style="list-style-type: '🤡 '; margin-left: 20px; font-size: 22px; font-weight: 600; line-height: 1.8;">
+                    <li>Нет рилсов (вообще 0 в Кстово)</li>
+                    <li>Нет квизов-опросников</li>
+                    <li>Всего 1-2 канала трафика у каждого</li>
+                </ul>
+            </div>
+
+            <div class="brutal-box" style="background: var(--accent); border-radius: 30px;">
+                <h3 style="font-size: 40px;">Мем ситуации:</h3>
+                <div
+                    style="background: white; border: 3px solid var(--border); padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; font-weight: 700; font-size: 20px;">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExejA3OTk0eTltdXhqb2p0OTcyNDlzOGhzenk3cXR5Zzh4emhxMHhyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QMHoU66sBXqqLqYvGO/giphy.gif"
+                        alt="This is fine" style="width:100%; border-radius: 5px; border: 2px solid black;">
+                    <p style="margin-top: 10px; margin-bottom: 0;">Конкуренты: "У нас же есть группа в ВК, лиды
+                        как-нибудь сами придут"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide" id="s3">
+        <h2 class="reveal">🕵️ Перепись наших "ВРАГОВ" (Все на ладони)</h2>
+        <p class="reveal d-1" style="font-size: 22px;">Мы проанализировали всех топов. Лидер выигрывает <span
+                class="marker">только за счет 630 старых отзывов</span> на Яндекс Картах. В остальном они все ленивые.
+        </p>
+
+        <div class="table-wrapper reveal d-2">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Кто такие</th>
+                        <th>Рейтинг / Отзывы</th>
+                        <th>Группа ВК</th>
+                        <th>Instagram</th>
+                        <th>🎥 Reels</th>
+                        <th>Квиз/Воронка</th>
+                        <th>Итого (из 50)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Михаил Шариков (НН)</strong></td>
+                        <td>⭐ 5.0 (630)</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td><span class="badge" style="background: #e4e4e7; color: black;">38/50</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Be Happy</strong></td>
+                        <td>⭐ 4.9 (129)</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td><span class="badge" style="background: #e4e4e7; color: black;">30/50</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>DUYUDU (Главный в Кстово)</strong></td>
+                        <td>⭐ 4.5</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td><span class="badge" style="background: #e4e4e7; color: black;">25/50</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aero Fox (Кстово)</strong></td>
+                        <td>—</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td><span class="badge" style="background: #e4e4e7; color: black;">24/50</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Honey Berry (Кстово)</strong></td>
+                        <td>—</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td class="check-no">❌</td>
+                        <td><span class="badge" style="background: #e4e4e7; color: black;">21/50</span></td>
+                    </tr>
+                    <tr class="highlight-row">
+                        <td style="font-size: 22px;">✨ <strong>ШАРМИКС (Мы)</strong></td>
+                        <td>Скоро будет 🚀</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-yes">✅</td>
+                        <td class="check-yes">🔥 Будут</td>
+                        <td class="check-yes">🔥 Будет</td>
+                        <td>🚀 Будет Топ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="chat-bubble right reveal d-3" style="float: right;">«Ни у кого нет Рилсов и Квизов. Это просто
+            смешно! Забираем трафик себе.» 🥷</div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide" id="s4">
+        <svg class="deco float" style="top: 10%; right: 10%;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" fill="none" stroke="var(--primary)"
+                stroke-width="6" />
+        </svg>
+
+        <h2 class="reveal">😭 Почемы клиенты в ярости (Боли)</h2>
+        <p class="reveal d-1" style="font-size: 24px;">Мы спарсили миллион гневных отзывов у конкурентов. Вот Топ-4
+            вещи, из-за которых люди хотят им врезать:</p>
+
+        <div class="brutal-box reveal d-2" style="max-width: 800px; padding: 40px;">
+            <div class="stat-item">
+                <div class="stat-label">🎈 Упали на пол 📉</div>
+                <div class="stat-track">
+                    <div class="stat-fill" style="width: 40%;"></div>
+                </div>
+                <div class="stat-val">40%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">🤬 Испортили сюрприз</div>
+                <div class="stat-track">
+                    <div class="stat-fill cyan" style="width: 25%;"></div>
+                </div>
+                <div class="stat-val">25%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">🤡 Ожидание / Реальность</div>
+                <div class="stat-track">
+                    <div class="stat-fill yellow" style="width: 15%;"></div>
+                </div>
+                <div class="stat-val">15%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">🤢 Воняют резиной 🤮</div>
+                <div class="stat-track">
+                    <div class="stat-fill black" style="width: 10%;"></div>
+                </div>
+                <div class="stat-val">10%</div>
+            </div>
+        </div>
+
+        <div class="chat-bubble reveal d-3" style="border-color: var(--primary);">
+            Рынок: *Продает вонючие сдувающиеся шары*<br>
+            Мы: *Чиним эти 4 пункта и забираем всю кассу* 🤑
+        </div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide" id="s5">
+        <h2 class="reveal">⚔️ Насколько мы круче (VS)</h2>
+
+        <div class="grid grid-2 reveal d-1">
+            <div class="brutal-box" style="border-color: #ff3333; background: #fff0f0;">
+                <h3 style="color: #ff3333; font-size: 30px;">Что предлагают они 🥴</h3>
+                <ul
+                    style="list-style: none; font-size: 22px; font-weight: 500; display:flex; flex-direction:column; gap:15px;">
+                    <li>❌ "Ой, ну шары летели целых два часа, вы наверное их батареей сожгли?"</li>
+                    <li>❌ Курьер звонит: "Алло, выходите, я вам шарики-сюрприз привез, а код домофона не знаю"</li>
+                    <li>❌ Ядовито-розовый цвет вместо пудрового</li>
+                    <li>❌ Дешевый латекс с запахом завода игрушек</li>
+                </ul>
+            </div>
+
+            <div class="brutal-box" style="border-color: #00cc66; background: #f0fff0;">
+                <h3 style="color: #00cc66; font-size: 30px;">Что даем мы (ШАРМИКС) 😎</h3>
+                <ul
+                    style="list-style: none; font-size: 22px; font-weight: 700; display:flex; flex-direction:column; gap:15px;">
+                    <li>✅ Паспорт: официально гарантируем 72 часа ⏱️</li>
+                    <li>✅ Ниндзя-доставка (Тихо приехали, отдали, не спалили сюрприз) 🥷</li>
+                    <li>✅ Фотка заказа в WhatsApp ДО отправки 📸</li>
+                    <li>✅ ЭКО-латекс 100% без запаха 🌿</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide" id="s6">
+        <h2 class="reveal">💎 КИЛЛЕР-ФИЧИ (Наш чит-код)</h2>
+        <p class="reveal d-1" style="font-size: 24px;">4 фишки, которые не стоят больших денег, но <span
+                class="marker-pink">выглядят на миллион</span>.</p>
+
+        <div class="grid grid-2 reveal d-2" style="margin-top: 20px;">
+            <div class="brutal-box" style="transform: rotate(-1deg);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-size: 40px;">📜</span>
+                    <span class="badge pink" style="transform: rotate(5deg);">~500₽ ПЕЧАТЬ</span>
+                </div>
+                <h3>1. «Паспорт Шаров»</h3>
+                <p>Красивая открытка к заказу: "Сим утверждаем: шары будут летать 72 часа". Упали раньше? Привезём новые
+                    бесплатно. <b>Доверие сразу = 100%.</b></p>
+            </div>
+
+            <div class="brutal-box" style="transform: rotate(1deg); background: var(--secondary);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-size: 40px;">🥷</span>
+                    <span class="badge" style="background: white;">УСЛУГА ЗА 0₽</span>
+                </div>
+                <h3>2. «Ниндзя-Доставка»</h3>
+                <p>Курьер не палит контору звонками имениннику. Заранее берем инструкции от заказчика, тихо звоним в
+                    дверь, молча вручаем восторг.</p>
+            </div>
+
+            <div class="brutal-box" style="transform: rotate(1deg); background: #b8a9e8;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-size: 40px;">📸</span>
+                    <span class="badge" style="background: white;">СНИЖАЕТ СТРЕСС</span>
+                </div>
+                <h3>3. «Спойлер-контроль»</h3>
+                <p>За полтора часа кидаем фотку в WhatsApp: "Оцените красоту, курьер загрузился!". Клиент больше не
+                    трясется, что привезут косой-кривой сет.</p>
+            </div>
+
+            <div class="brutal-box" style="transform: rotate(-1deg); background: var(--accent);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="font-size: 40px;">💅</span>
+                    <span class="badge" style="background: white;">ЧЕК +20-30%</span>
+                </div>
+                <h3>4. Эстетика "Old Money" (Pinterest)</h3>
+                <p>Никаких вырвиглазных неоновых шариков из перехода. Только благородные оттенки. Выглядит ДОРОГО и
+                    стильно.</p>
+                <div class="palette">
+                    <div class="color-swatch" style="background: #a0826d;" data-hex="Мокко"></div>
+                    <div class="color-swatch" style="background: #d4a0a0;" data-hex="Пудра"></div>
+                    <div class="color-swatch" style="background: #a8c5a0;" data-hex="Фисташка"></div>
+                    <div class="color-swatch" style="background: #e8dcc8;" data-hex="Экрю"></div>
+                    <div class="color-swatch" style="background: #b2a4d4;" data-hex="Лаванда"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide" id="s7">
+        <h2 class="reveal">🌪️ Наша "Секретная Воронка" (0₽ на старте)</h2>
+
+        <div class="grid grid-2 reveal d-1">
+            <div class="funnel-wrapper">
+                <div class="funnel-box" style="width: 100%; background: var(--secondary);">
+                    1. ЛОВИМ ГОРЯЧИХ 🔥
+                    <span>Яндекс.Карты, 2GIS, Посевы в пабликах</span>
+                </div>
+                <div class="arrow-down">⬇</div>
+                <div class="funnel-box" style="width: 85%; background: var(--accent);">
+                    2. ВЛЮБЛЯЕМ ВИЗУАЛОМ 😍
+                    <span>Горячие Reels, Палитра Old Money </span>
+                </div>
+                <div class="arrow-down">⬇</div>
+                <div class="funnel-box" style="width: 70%; background: var(--primary); color: white;">
+                    3. ЗАКРЫВАЕМ В ЧАТЕ 💬
+                    <span>Ответ за 5 минут! Предлагаем готовые пакеты</span>
+                </div>
+                <div class="arrow-down">⬇</div>
+                <div class="funnel-box" style="width: 55%; background: #000; color: #fff;">
+                    4. ЗАМЫКАЕМ В БАЗУ 🔒
+                    <span>Пишем им через 11 мес на следующий праздник!</span>
+                </div>
+            </div>
+
+            <div class="brutal-box" style="display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="font-size: 30px; color: var(--primary);">Скрипт нормального менеджера:</h3>
+                <p
+                    style="font-size: 22px; text-decoration: line-through; color: var(--text-light); margin-bottom: 10px;">
+                    "Добрый день, сет стоит 3500 рублей."</p>
+                <div
+                    style="background: var(--bg); padding: 20px; border-radius: 12px; border: 2px solid var(--border);">
+                    <p style="font-size: 20px; font-weight: 700; margin:0;">"Привет! 🎉 Крутой выбор! А для кого будет
+                        праздник? Мальчик/девочка? Какой возраст? Ответьте, и я за 2 минуты скину 3 сочных варианта под
+                        ваш бюджет с фотками!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: КАНАЛЫ ТРАФИКА (NEW) -->
+    <section class="slide" id="s8">
+        <h2 class="reveal">🚀 Каналы Трафика: Во что мы вкладываемся?</h2>
+        <p class="reveal d-1" style="font-size: 24px;">Мы не распыляемся. Бьем только туда, где есть лиды.</p>
+
+        <div class="grid grid-traffic reveal d-2" style="margin-top: 10px;">
+            <!-- Канал 1 -->
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: var(--accent);">
+                <div style="font-size: 50px;">🗺️</div>
+                <h3>Яндекс.Карты & 2GIS</h3>
+                <p style="font-size: 18px; color: var(--text-light);">Самая горячая аудитория. Ищут "шарики рядом
+                    сейчас". Оформляем топ-профиль, собираем отзывы за скидку.</p>
+                <div style="margin-top: auto; padding-top: 15px; border-top: 2px dashed var(--border);">
+                    <span class="badge yellow">ПРИНЕСЕТ: 30-50 лидов/мес</span>
+                </div>
+            </div>
+
+            <!-- Канал 2 -->
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: var(--secondary);">
+                <div style="font-size: 50px;">📱</div>
+                <h3>ВКонтакте (Группа + Таргет)</h3>
+                <p style="font-size: 18px; color: var(--text-light);">Мамы сидят в ВК. Делаем эстетичный каталог
+                    товаров. Потом запустим парсинг на группы детсадов и конкурентов.</p>
+                <div style="margin-top: auto; padding-top: 15px; border-top: 2px dashed var(--border);">
+                    <span class="badge" style="background: var(--secondary)">ПРИНЕСЕТ: 20-40 лидов/мес</span>
+                </div>
+            </div>
+
+            <!-- Канал 3 -->
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: var(--primary);">
+                <div style="font-size: 50px;">🎬</div>
+                <h3>Instagram & VK Reels</h3>
+                <p style="font-size: 18px; color: var(--text-light);">Виральный охват. Снимаем таймлапсы и "The Reveal"
+                    эмоции детей. Хештеги #Кстово #НижнийНовгород делают магию SEO.</p>
+                <div style="margin-top: auto; padding-top: 15px; border-top: 2px dashed var(--border);">
+                    <span class="badge pink">ПРИНЕСЕТ: 15-30 лидов/мес</span>
+                </div>
+            </div>
+
+            <!-- Канал 4 -->
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: #00e676;">
+                <div style="font-size: 50px;">🤝</div>
+                <h3>Партнерка B2B</h3>
+                <p style="font-size: 18px; color: var(--text-light);">Пишем аниматорам, лофтам и кондитерам в Кстово:
+                    "Давай дружить, 10% кэшбека за клиента".</p>
+                <div style="margin-top: auto; padding-top: 15px; border-top: 2px dashed var(--border);">
+                    <span class="badge" style="background:#00e676">ПРИНЕСЕТ: 10-20 лидов/мес</span>
+                </div>
+            </div>
+
+            <!-- Канал 5 -->
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: #b8a9e8;">
+                <div style="font-size: 50px;">💌</div>
+                <h3>База "Возврат ДР" (WhatsApp)</h3>
+                <p style="font-size: 18px; color: var(--text-light);">Записываем все даты ДР в табличку. За месяц до
+                    праздника пишем: "Привет! Скоро праздник, вот вам скидка ранней пташки".</p>
+                <div style="margin-top: auto; padding-top: 15px; border-top: 2px dashed var(--border);">
+                    <span class="badge" style="background:#b8a9e8; color:black;">КАЖДЫЙ 2-Й ПОВТОР</span>
+                </div>
+            </div>
+
+            <!-- МЕМ -->
+            <div class="brutal-box"
+                style="background: var(--card); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0;">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2FpeWdrcWNqcWhqZ2R3MWcycmV2aDVtdWtnNWx6b3RkZnNxNWw1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LdOyjZ7io5Msw/giphy.gif"
+                    alt="Money" style="width: 100%; height: 100%; object-fit: cover;">
+                <h3
+                    style="position: absolute; bottom: 10px; right: 10px; background: white; padding: 5px 10px; border: 2px solid black; transform: rotate(-5deg);">
+                    ИТОГО: МНОГО ЛИДОВ</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9 -->
+    <section class="slide" id="s9">
+        <h2 class="reveal">📲 Чего Снимать? (План по контенту)</h2>
+        <table class="reveal d-1" style="min-width: unset;">
+            <thead>
+                <tr>
+                    <th>Формат Видоса</th>
+                    <th>Зачем это нужно?</th>
+                    <th>В неделю</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>🎬 "The Reveal" (Вручение)</strong></td>
+                    <td>Лицо счастливого ребенка, когда открывается дверь. Это слёзы мамочек в комментах и 100%
+                        рекомендации в Инсте!</td>
+                    <td><span class="badge pink">2x / Нед</span></td>
+                </tr>
+                <tr>
+                    <td><strong>⌚ Таймлапс Магии</strong></td>
+                    <td>Телефон на штатив: как куча латекса за 15 секунд превращается в фонтан. Залипательно до жути.
+                    </td>
+                    <td><span class="badge pink">2x / Нед</span></td>
+                </tr>
+                <tr>
+                    <td><strong>📸 До/После Праздника</strong></td>
+                    <td>Скучная стена в квартире ➡️ Яркая Инста-спот фотозона. Продаем идею "Мы меняем пространство".
+                    </td>
+                    <td><span class="badge">1x / Нед</span></td>
+                </tr>
+                <tr>
+                    <td><strong>📱 Stories "Кухня"</strong></td>
+                    <td>Снимаем Hi-Float, новые закупки, как везем шары в машине, наши фейлы. Меньше гламура, больше
+                        жизы.</td>
+                    <td><span class="badge yellow">Every day</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="chat-bubble right reveal d-2" style="float:right;">ВК Клипы и Инста Reels сейчас работают как SEO.
+            Пишем во всех текстах "шары кстово доставка" и нас будут гуглить! 🔍</div>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide" id="s10">
+        <h2 class="reveal">📅 Таймлайн: План Действий на Завтра</h2>
+
+        <div class="grid grid-3 reveal d-1">
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: var(--secondary);">
+                <div class="badge" style="margin-bottom: 15px;">НЕДЕЛЯ 1: ЗАЛИВАЕМ ФУНДАМЕНТ</div>
+                <ul style="list-style: none; display:flex; flex-direction:column; gap:10px; font-weight: 500;">
+                    <li>🔥 Делаем жирную точку на Яндекс Картах</li>
+                    <li>📷 Собираем пак фоток в стиле Pinterest (Old Money)</li>
+                    <li>💰 Считаем 5-7 пакетных ценников</li>
+                    <li>🖨️ Печатаем 100 "Паспортов шаров"</li>
+                    <li>🍰 Пишем 3 кондитерам в Кстово для партнерки</li>
+                </ul>
+            </div>
+
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: var(--primary);">
+                <div class="badge pink" style="margin-bottom: 15px;">НЕДЕЛЯ 2-3: ПОДНИМАЕМ ШУМ</div>
+                <ul style="list-style: none; display:flex; flex-direction:column; gap:10px; font-weight: 500;">
+                    <li>🎥 Снимаем и пушим первые 4 Reels</li>
+                    <li>🛒 Красиво оформляем витрину товаров в ВК</li>
+                    <li>📋 Делаем Excel-табличку "База ДР клиентов"</li>
+                    <li>⚡ Включаем все пуши: отвечаем за 5 минут</li>
+                    <li>🧠 Собираем квиз "Ответь на 3 вопроса - подберем шары"</li>
+                </ul>
+            </div>
+
+            <div class="brutal-box" style="border-top-width: 15px; border-top-color: var(--accent);">
+                <div class="badge yellow" style="margin-bottom: 15px;">МЕСЯЦ 2: ТОТАЛЬНАЯ ДОМИНАЦИЯ</div>
+                <ul style="list-style: none; display:flex; flex-direction:column; gap:10px; font-weight: 500;">
+                    <li>⭐ Добиваем 30+ супер-отзывов на Картах (Даем скидку 10%)</li>
+                    <li>🎯 Врубаем микро-таргет ВК (на мамочек Кстово)</li>
+                    <li>🌸 Выходим на платформу Flowwow</li>
+                    <li>🎉 Запускаем подписку "Все праздники семьи на нас"</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11 -->
+    <section class="slide" id="s11" style="align-items: center; text-align: center;">
+        <svg class="deco star-spin" style="bottom: 20%; left: 20%;" viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+            <path class="svg-star" d="M50 0 L61.8 38.2 L100 50 L61.8 61.8 L50 100 L38.2 61.8 L0 50 L38.2 38.2 Z" />
+        </svg>
+
+        <h1 class="reveal d-1" style="font-size: clamp(80px, 12vw, 150px); text-shadow: 8px 8px 0 var(--secondary);">0
+            ➡️ 630</h1>
+
+        <div class="brutal-box reveal d-2" style="max-width: 800px; margin: 20px auto; background: var(--accent);">
+            <p style="font-size: 28px; font-weight: 800; margin: 0; font-family: var(--font-heading);">У нашего главного
+                конкурента 630 отзывов.<br>У нас — 0.</p>
+        </div>
+
+        <p class="reveal d-3" style="font-size: 32px; font-weight: 700; max-width: 900px; margin-top: 30px;">
+            Они продают кусок дешевого латекса с гелием.<br>
+            <span class="marker">А мы продаем эстетику крутого сервиса и гарантию.</span>
+        </p>
+
+        <button class="brutal-btn reveal d-3" style="margin-top: 40px; font-size: 24px; padding: 20px 40px;"
+            onclick="window.scrollTo(0,0)">
+            🧨 ПОГНАЛИ СДЕЛАТЬ ЭТО
+        </button>
+    </section>
+
+    <!-- Navigation Box -->
+    <div class="nav-box">
+        <button class="brutal-btn" onclick="moveSlide(-1)" style="padding: 10px 15px;">⬆️</button>
+        <button class="brutal-btn" onclick="moveSlide(1)" style="padding: 10px 15px;">⬇️</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+
+            currentSlide = index;
+            slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+
+            slides.forEach((slide, i) => {
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+
+        function moveSlide(dir) { showSlide(currentSlide + dir); }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    slides.forEach((s, idx) => { if (s === entry.target) currentSlide = idx; });
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault(); moveSlide(1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault(); moveSlide(-1);
+            }
+        });
+
+        setTimeout(() => { slides[0].classList.add('active'); }, 100);
+    </script>
+</body>
+
+</html>
